@@ -1,0 +1,4 @@
+-add a section for (active) projects
+
+-add a table of contents?
+-make a logo to include?
