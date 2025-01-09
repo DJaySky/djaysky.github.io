@@ -1,4 +1,3 @@
--add a section for (active) projects
-
+-add a section for frameworks/apps (parallel to games)?
 -add a table of contents?
 -make a logo to include?
