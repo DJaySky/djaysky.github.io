@@ -1,3 +1,6 @@
+-fix the background color not taking up the whole page in games.html (the div does't have a large enough height)
+
 -add a section for frameworks/apps (parallel to games)?
+-add back buttons/homepage button?
 -add a table of contents?
 -make a logo to include?
