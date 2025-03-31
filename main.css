@@ -3,23 +3,44 @@
 	src(Inconsolata.ttf);
 }
 
+:root {
+	--background-color: black;
+	--text-color: white;
+}
+
 body {
-	background : black;
+	background : var(--background-color);
 	overflow: hidden;
 
 	font-family: Inconsolata;
+	font-size: 20px;
 
-	color: white;
+	color: var(--text-color);
 }
 
 input {
-	background: black;
-	color: white;
+	background: var(--background-color);
+	color: var(--text-color);
 	border: none;
+
+	font-family: Inconsolata;
+	font-size: 20px;
 }
 
 input:focus {
 	outline: none;
+
+	font-family: Inconsolata;
+	font-size: 20px;
+}
+
+.header {
+	min-width: 100%;
+	text-align: center;
+}
+
+#output {
+	margin-bottom: 0px;
 }
 
 #commandInput {

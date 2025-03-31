@@ -9,14 +9,35 @@
 		<link rel="stylesheet" href="main.css">
 	</head>
 	<body>
+		<div class="header">
+			Press <b>escape</b> at any time to focus the terminal.
+			Use the "help" command to list commands.
+		</div>
+
 		<p id="output"></p>
 
-		<p style="display: inline;">></p>
-		<input id="commandInput" placeholder = "type 'help' for a list of commands"></input>
+		<p style="display: inline;" id="commandPrefix">djaysky/></p>
+		<input id="commandInput"></input>
 
-		<script>
-			var commandInput = document.getElementById("commandInput");
-			commandInput.focus();
-		</script>
+		<!--
+			portfolio is organized as a filesystem - each "category" is a 
+				directory, and each "article"/piece of info is a file
+			if we set the innerhtml attributes, we can use html instead 
+				of just raw text (allows for links, images, etc)
+			we can also offer a "normal"/read-only version where you can
+				see all of the information without needing to type terminal commands
+
+			command list:
+				help: lists commands
+				gui: opens the gui portfolio
+				clear: clears the "terminal"
+				ls: lists "files" in the directory
+				cd (directory): moves into "directories"
+				read (file): reads a "file"
+				theme (1,2,3): sets the page's theme (default, blue, Sakura)
+				color (bg) (fg): lets you choose custom colors for the page
+		!-->
+
+		<script src="main.js"></script>
 	</body>
 </html>
