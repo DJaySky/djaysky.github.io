@@ -3,6 +3,8 @@
 		"type" : "directory",
 
 		"files" : {
+			"test.txt" : "this is a test",
+			"test2.txt" : "a second test"
 		}
 	},
 

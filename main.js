@@ -1,3 +1,10 @@
+/*
+ * todo:
+ *   - fix the ls command creating an extra blank line
+ *       -this occurs because the last file also has a <br> appended to it
+ *   -
+ */
+
 var output = document.getElementById("output");
 var commandPrefix = document.getElementById("commandPrefix");
 var commandInput = document.getElementById("commandInput");
@@ -6,11 +13,12 @@ commandInput.focus();
 var commandBuffer = [];
 var bufferIndex = 0;
 
-var fsData;
+var fsData, currentDir;
 const fileJson = fetch("info.json")
 	.then(response => response.json())
 	.then(data => {
 		fsData = data;
+		currentDir = fsData;
 		console.log(data);
 	})
 	.catch(error => console.error("Error fetching info.json: ", error));
@@ -54,7 +62,41 @@ function parseCommand(input) {
 			output.innerHTML = ""
 			break;
 		case "ls":
-			console.log(fsData.valueOf("files").valueOf("links.txt"));
+			if(!currentDir.files) {
+				printOutput("No files here ;)");
+				return;
+			}
+
+			let directories = [];
+			let files = "";
+
+			for(let name in currentDir) {
+				if(currentDir[name].type == "directory") {
+					directories.push(name + "/<br>");
+				}
+			}
+
+			for(let file in currentDir.files) {
+				files = files + file + "<br>";
+			}
+
+			printOutput("ls<br>" + directories.concat(files).join(" "));
+			break;
+		case "cd":
+			if(currentDir[args]) {
+				currentDir = currentDir[args];
+				printOutput("cd " + args);
+				commandPrefix.innerHTML = "djaysky/" + args + "/>";
+			} else {
+				printOutput("cd " + args + "<br>Directory \"" + args + "\" could not be found");
+			}
+			break;
+		case "read":
+			if(currentDir.files[args]) {
+				printOutput("read " + args + "<br>" + currentDir.files[args]);
+			} else {
+				printOutput("read " + args + "<br>File \"" + args + "\" could not be found.");
+			}
 			break;
 		case "theme":
 			switch(args) {
@@ -75,7 +117,7 @@ function parseCommand(input) {
 			break;
 		case "color":
 			const argIndex = args.search(regex);
-			var arg1, arg2;
+			let arg1, arg2;
 			if(argIndex != -1) {
 				arg1 = args.slice(0, argIndex);
 				arg2 = args.slice(argIndex);
@@ -92,7 +134,7 @@ function parseCommand(input) {
 			window.location.href = "https://github.com/DJaySky";
 			break;
 		default:
-			printOutput(input+"<br>invalid command: \""+input+"\"");
+			printOutput(input+"<br>Invalid command: \""+input+"\"");
 			break;
 	}
 }
@@ -101,9 +143,12 @@ document.addEventListener("keydown", (e) => {
 	if(e.code == "Escape") {
 		commandInput.focus();
 		commandInput.value = "";
-	} else if(e.code == "Enter") {
+	} else if(
+		e.code == "Enter" &&
+		document.activeElement == commandInput
+	) {
 		parseCommand(commandInput.value);
-		var newPos = commandBuffer.push(commandInput.value);
+		let newPos = commandBuffer.push(commandInput.value);
 		bufferIndex = newPos;
 		commandInput.value = "";
 	} else if(e.code == "ArrowUp" && bufferIndex > 0) {
