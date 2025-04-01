@@ -1,0 +1,26 @@
+{
+	"about": {
+		"type" : "directory",
+
+		"files" : {
+		}
+	},
+
+	"projects" : {
+		"type" : "directory",
+
+		"files" : {
+		}
+	},
+
+	"games" : {
+		"type" : "directory",
+
+		"files" : {
+		}
+	},
+
+	"files" : {
+		"links.txt" : "<a href=\"https://www.llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch.co.uk/\">links go here</a>"
+	}
+}

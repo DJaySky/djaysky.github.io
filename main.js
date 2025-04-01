@@ -6,6 +6,15 @@ commandInput.focus();
 var commandBuffer = [];
 var bufferIndex = 0;
 
+var fsData;
+const fileJson = fetch("info.json")
+	.then(response => response.json())
+	.then(data => {
+		fsData = data;
+		console.log(data);
+	})
+	.catch(error => console.error("Error fetching info.json: ", error));
+
 const commands = {
 	help: "help goes here",
 	theme: "themes are not implemented yet"
@@ -44,6 +53,9 @@ function parseCommand(input) {
 		case "clear":
 			output.innerHTML = ""
 			break;
+		case "ls":
+			console.log(fsData.valueOf("files").valueOf("links.txt"));
+			break;
 		case "theme":
 			switch(args) {
 				case "1":
@@ -75,6 +87,9 @@ function parseCommand(input) {
 
 			updateTheme(arg2, arg1);
 			printOutput("color "+args);
+			break;
+		case "exit":
+			window.location.href = "https://github.com/DJaySky";
 			break;
 		default:
 			printOutput(input+"<br>invalid command: \""+input+"\"");
